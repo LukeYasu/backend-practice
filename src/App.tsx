@@ -1,8 +1,18 @@
+import { Route, Routes } from 'react-router-dom';
+import { HomePage } from './components/layout/HomePage';
+import { MovieForm } from './components/layout/MovieForm';
+import { Header } from './components/layout/Header';
+import { NotFound } from './components/layout/NotFound';
+
 function App() {
 	return (
-		<div className="flex h-screen w-screen flex-col items-center justify-center bg-blue-300 font-bold">
-			<p className="text-6xl text-white">LearningFuze Vite React Template</p>
-		</div>
+		<Routes>
+			<Route path="/" element={<Header />}>
+				<Route index element={<HomePage />} />
+				<Route path="movie-form" element={<MovieForm />} />
+				<Route path="*" element={<NotFound />} />
+			</Route>
+		</Routes>
 	);
 }
 
