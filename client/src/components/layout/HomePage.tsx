@@ -4,8 +4,6 @@ export function HomePage() {
 	return (
 		<div className="h-screen">
 			<MovieRatings />
-			<MovieRatings />
-			<MovieRatings />
 		</div>
 	);
 }

@@ -6,10 +6,10 @@ drop schema "public" cascade;
 
 create schema "public";
 
-CREATE TABLE "movie" (
-  "itemId" serial PRIMARY KEY,
+CREATE TABLE "movies" (
+  "movieId" serial PRIMARY KEY,
   "title" text,
   "summary" text,
   "link" text,
-  "rating" text
+  "rating" integer
 );
