@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 export function EditForm() {
 	const location = useLocation();
 	const prePop = location.state as Movie;
-	const [movieId, setMovieId] = useState(prePop.movieId);
+	const movieId = prePop.movieId;
 	const [title, setTitle] = useState(prePop.title);
 	const [summary, setSummary] = useState(prePop.summary);
 	const [link, setLink] = useState(prePop.link);
@@ -22,10 +22,10 @@ export function EditForm() {
 		}
 		try {
 			await updateMovie(data);
+			navigate('/');
 		} catch (err) {
 			console.error(err);
 		}
-		navigate('/');
 	}
 	return (
 		<div className="flex h-screen justify-center">
@@ -37,6 +37,7 @@ export function EditForm() {
 				<label htmlFor="form-title">Title: </label>
 				<input
 					id="form-title"
+					name="title"
 					type="text"
 					className="bg-white"
 					value={title}
@@ -45,6 +46,7 @@ export function EditForm() {
 				<label htmlFor="form-summary">Summary: </label>
 				<input
 					id="form-summary"
+					name="summary"
 					type="text"
 					className="bg-white"
 					value={summary}
@@ -53,6 +55,7 @@ export function EditForm() {
 				<label htmlFor="form-link">Link: </label>
 				<input
 					id="form-link"
+					name="link"
 					type="text"
 					className="bg-white"
 					value={link}
@@ -63,6 +66,7 @@ export function EditForm() {
 				<label htmlFor="form-rating">Rating</label>
 				<select
 					id="form-rating"
+					name="rating"
 					className="w-12 bg-white"
 					value={rating}
 					onChange={(e) => setRating(Number(e.target.value))}

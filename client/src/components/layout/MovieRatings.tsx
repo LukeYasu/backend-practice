@@ -18,6 +18,7 @@ export function MovieRatings() {
 		}
 		fetchMovies();
 	});
+	if (movies.length === 0) return <div>no movie entries</div>;
 	async function handleDelete(movieId: number) {
 		try {
 			deleteMovie(movieId);

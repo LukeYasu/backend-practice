@@ -48,21 +48,23 @@ app.post('/api/movie/', async (req, res, next) => {
 	}
 });
 
-app.put('/api/movie/', async (req, res, next) => {
+app.put('/api/movie/:movieId', async (req, res, next) => {
 	try {
-		const { movieId, title, summary, link, rating } = req.body;
+		const { movieId } = req.params;
+		const { title, summary, link, rating } = req.body;
 		if (!title || !summary || !link || !rating) {
 			throw new ClientError(400, 'all required fields not valid');
 		}
 		const sql = `
-        insert into "movies" ("movieId", "title", "summary", "link", "rating")
-        values ($1, $2, $3, $4, $5)
+        update "movies"
+        set "title" = $2, "summary" = $3, "link" = $4, "rating" = $5
+        where "movieId" = $1
         returning *
         `;
 		const params = [movieId, title, summary, link, rating];
 		const result = await db.query<Movie>(sql, params);
 		const [movie] = result.rows;
-		res.status(201).json(movie);
+		res.status(200).json(movie);
 	} catch (err) {
 		next(err);
 	}

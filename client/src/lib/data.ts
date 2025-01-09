@@ -47,7 +47,7 @@ export async function updateMovie(movie: Movie) {
 		},
 		body: JSON.stringify(movie),
 	};
-	const res = await fetch(`/api/movie/`, req);
+	const res = await fetch(`/api/movie/${movie.movieId}`, req);
 	if (!res.ok) throw new Error(`Fetch Error ${res.status}`);
 	return await res.json();
 }
